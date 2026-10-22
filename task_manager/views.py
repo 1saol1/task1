@@ -12,9 +12,10 @@ def all_tasks_view():
 
 @app.route('/<int:id>')
 def task_view(id):
-    task = Task.query.get_or_404(id=id)
+    task = Task.query.get_or_404(id)
+    tasks = [task]
 
-    return render_template("tasks.html", tasks=[task])
+    return render_template("tasks.html", tasks=tasks)
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -32,12 +33,12 @@ def add_view():
 
         return redirect(url_for('task_view', id=task.id))
 
-    return render_template('add_task.html')
+    return render_template('add_task.html', form=form)
 
 
-@app.route('/change/<int: id>', methods=["GET", "POST"])
+@app.route('/change/<int:id>', methods=["GET", "POST"])
 def change_task(id):
-    task = Task.query.get_or_404(id=id)
+    task = Task.query.get_or_404(id)
 
     form = TaskForm(obj=task)
 
@@ -48,15 +49,26 @@ def change_task(id):
 
     return render_template('change_task.html', form=form, task=task)
 
-@app.route('/delete/<int:id>')
+
+@app.route('/delete/<int:id>', methods=['POST'])
 def delete_task(id):
-    task = Task.query.get_or_404(id=id)
+    task = Task.query.get_or_404(id)
 
     db.session.delete(task)
     db.session.commit()
 
     return redirect(url_for('all_tasks_view'))
 
+
+@app.route('/completed/<int:id>', methods=["POST"])
+def set_completed_true(id):
+    task = Task.query.get_or_404(id)
+
+    task.completed = True
+
+    db.session.commit()
+
+    return redirect(url_for('task_view', id=id))
 
 
 

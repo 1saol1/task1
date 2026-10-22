@@ -1,6 +1,6 @@
 from flask import Flask
 
-from flask_sqlalchemy import SQLALCHEMY
+from flask_sqlalchemy import SQLAlchemy
 
 from settings import Config
 
@@ -9,6 +9,6 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 
-db = SQLALCHEMY(app)
+db = SQLAlchemy(app)
 
 from . import models, views

@@ -7,8 +7,18 @@
     <ul>
         {% for task in tasks %}
         <li>
-            {{ task.title }}
-            <a href="{{url_for(change_task, id=task.id)}}">✏️</a>
+            {% if task.completed %}
+                <s>{{ task.title }}</s>
+            {% else %}
+                {{ task.title }}
+            {% endif %}
+
+            {% if not task.completed %}
+                <form method="POST" action="{{ url_for('set_completed_true', id=task.id) }}" style="display:inline">
+                    <button type="submit">✅ Выполнено</button>
+                </form>
+            {% endif %}
+            <a href="{{url_for('change_task', id=task.id)}}">✏️</a>
             <form method="POST" action="{{url_for('delete_task', id=task.id)}}" style="display:inline;">
                 <button type="submit" onclick="return confirm('Удалить задачу?')">🗑️</button>
         
