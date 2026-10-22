@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Список заданий {% endblock %}
+{% block content %}
+<main>
+    <h3>Список заданий</h3>
+    {% if tasks %}
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task.title }}
+            <a href="{{url_for(change_task, id=task.id)}}">✏️</a>
+            <form method="POST" action="{{url_for('delete_task', id=task.id)}}" style="display:inline;">
+                <button type="submit" onclick="return confirm('Удалить задачу?')">🗑️</button>
+        
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Задач пока нет</p>
+    {% endif %}
+</main>
+{% endblock %}

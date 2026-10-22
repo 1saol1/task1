@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} Изменить задачу {% endblock %}
+{% block content %}
+<main>
+    <h3>Изменить задачу</h3>
+    <form method="POST" action="{{ url_for('change_task', id=task.id) }}">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label }}
+            {{ form.title() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</main>
+{% endblock %}

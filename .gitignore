@@ -1,0 +1,30 @@
+# Виртуальное окружение
+venv/
+.venv/
+env/
+
+# Секреты и переменные окружения
+.env
+.env.*
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Кэш mypy (видно на скриншоте)
+.mypy_cache/
+
+# Базы данных (если используешь SQLite)
+*.sqlite
+*.sqlite3
+*.db
+
+# Настройки IDE (VS Code, PyCharm и т.д.)
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Логи и прочее
+*.log
