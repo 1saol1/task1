@@ -15,11 +15,13 @@
 
             {% if not task.completed %}
                 <form method="POST" action="{{ url_for('set_completed_true', id=task.id) }}" style="display:inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"
                     <button type="submit">✅ Выполнено</button>
                 </form>
             {% endif %}
             <a href="{{url_for('change_task', id=task.id)}}">✏️</a>
             <form method="POST" action="{{url_for('delete_task', id=task.id)}}" style="display:inline;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" >
                 <button type="submit" onclick="return confirm('Удалить задачу?')">🗑️</button>
         
             </form>
