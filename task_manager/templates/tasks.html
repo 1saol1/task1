@@ -15,7 +15,7 @@
 
             {% if not task.completed %}
                 <form method="POST" action="{{ url_for('set_completed_true', id=task.id) }}" style="display:inline">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit">✅ Выполнено</button>
                 </form>
             {% endif %}
